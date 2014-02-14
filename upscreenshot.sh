@@ -9,7 +9,8 @@ URL="http://$SITE/$NAME"
 UMASK=775
 PORT=22
 
-scrot -z -q 80 $@ "$TEMPFILE"
+sleep 0.1
+scrot -q 80 $* "$TEMPFILE" 2> ~/scripterror
 chmod $UMASK "$TEMPFILE"
 scp -p -P $PORT "$TEMPFILE" $USER@$SITE:$DIR
 if [[ $? == 0 ]]; then
