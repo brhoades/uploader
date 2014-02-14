@@ -1,6 +1,7 @@
 #!/bin/bash
 
-NAME=$(mktemp --dry-run XXXXX.png)
+TEMPFILE=$(mktemp --tmpdir XXXXX.png)
+NAME=$(basename "$TEMPFILE")
 SITE="i.brod.es"
 USER="aaron"
 DIR="/var/www/images/$NAME"
@@ -8,9 +9,9 @@ URL="http://$SITE/$NAME"
 PORT=22
 
 if [ ! -z $1 ]; then
-  convert $@ /tmp/$NAME
-  out=`scp -P $PORT /tmp/$NAME $USER@$SITE:$DIR`
-  rm /tmp/$NAME
+  convert $@ "$TEMPFILE"
+  out=`scp -P $PORT "$TEMPFILE" $USER@$SITE:$DIR`
+  rm "$TEMPFILE"
   xsel < "$URL"
   if [ $out == 0 ]; then
     notify-send 'Uploaded and pasted into clipboard.' $URL --icon=dialog-information
