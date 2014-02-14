@@ -8,14 +8,12 @@ DIR="/var/www/images/$NAME"
 URL="http://$SITE/$NAME"
 PORT=22
 
-if [ ! -z $1 ]; then
-  convert $@ "$TEMPFILE"
-  out=`scp -P $PORT "$TEMPFILE" $USER@$SITE:$DIR`
-  rm "$TEMPFILE"
-  xsel < "$URL"
-  if [ $out == 0 ]; then
-    notify-send 'Uploaded and pasted into clipboard.' $URL --icon=dialog-information
-  else
-    notify-send 'Upload failed.' --icon=dialog-error
-  fi
+echo $URL | xsel --clipboard -i
+scrot -z -q 80 $@ $TEMPFILE
+scp -P $PORT "$TEMPFILE" $USER@$SITE:$DIR
+rm $TEMPFILE
+if [[ $? == 0 ]]; then
+  notify-send 'Uploaded and pasted into clipboard.' $URL --icon=dialog-information
+else
+  notify-send 'Upload failed.' --icon=dialog-error
 fi
