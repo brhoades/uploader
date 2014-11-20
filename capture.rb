@@ -38,7 +38,6 @@ OptionParser.new do |o|
   o.on '-t TYPE', '--file-type', "Set the image file type" do |t|
     opt[:filetype] = t
   end
-
 end.parse!
 
 # Now deal with it
