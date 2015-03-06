@@ -10,7 +10,7 @@ UMASK=775
 PORT=22
 
 sleep 0.1
-scrot -q 80 $* "$TEMPFILE"
+escrotum "$TEMPFILE" $*
 chmod $UMASK "$TEMPFILE"
 scp -p -P $PORT "$TEMPFILE" $USER@$SITE:$DIR
 if [[ $? == 0 ]]; then
