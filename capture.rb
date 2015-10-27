@@ -5,7 +5,7 @@ require 'optparse'
 SITE="i.brod.es"
 USER="aaron"
 DIR="/var/www/images/" # vvv
-URL="http://#{SITE}/"  #filename is put on the end of this
+URL="https://#{SITE}/"  #filename is put on the end of this
 UMASK=775
 PORT=22
 

@@ -5,7 +5,7 @@ NAME=$(basename "$TEMPFILE")
 SITE="i.brod.es"
 USER="aaron"
 DIR="/var/www/images/$NAME"
-URL="http://$SITE/$NAME"
+URL="https://$SITE/$NAME"
 UMASK=775
 PORT=22
 
